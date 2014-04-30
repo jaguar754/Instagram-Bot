@@ -2,8 +2,8 @@
 
 '''
 Cranklin's Instagram Bot v.1.0 
-Repaired By: EMN_DEV
- EMN_DEV NOTES:
+Repaired By: github.com/JeffHenry
+Notes from Jeff:
 	- Updated Login
 	- Updated Like [Webstagram no longer takes POST requests for liking an image.]
 	

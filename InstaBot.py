@@ -9,8 +9,7 @@ Repairs:
 	- Updated Like Requests
 	- Updated Next Page Search
 =================================================================================
-FOR MULTIPLE ACCOUNTS, ADD USERNAME AND PASSWORDS TO THE ARRAYS BELOW. MAKE SURE
-THE APPROPRIATE PASSWORD GOES WITH THE SAME INDEX AS THE USERNAME.
+	MULTIPLE ACCOUNTS? EDIT THE ARRAYS BELOW USING THE FORMAT SPECIFIED
 =================================================================================
 
 This bot gets you more likes and followers on your Instagram account.

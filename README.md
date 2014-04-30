@@ -4,6 +4,7 @@ Instagram-Bot v 1.1
 WORKING AS OF APRIL 2014
 
 Original By: github.com/Cracklin
+
 Repaired By: github.com/JeffHenry after web.stagrams April 2014 update
 
 ==============================

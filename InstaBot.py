@@ -47,8 +47,8 @@ import time
 ##### EDIT THESE BELOW
 
 # your instagram username and password
-username = "emn_jefe_built"
-password = "072189"
+username = "username"
+password = "password"
 
 #set a like limit per hashtag. Set value to 0 if you don't want a limit
 hashtaglikelimit = 100

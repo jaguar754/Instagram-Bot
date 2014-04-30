@@ -123,7 +123,7 @@ def like():
 		nextpage = "http://web.stagram.com/tag/"+tag+"/?vm=list"
 		#print "nextpage: " + nextpage 
 		#enter hashtag like loop
-		while nextpage != False and (hashtaglikes < 200):
+		while nextpage != False and (hashtaglikes < hashtaglikelimit):
 			buf = cStringIO.StringIO()
 			c = pycurl.Curl()
 			c.setopt(pycurl.URL, nextpage)
@@ -148,7 +148,7 @@ def like():
 				nextpage = "http://web.stagram.com"+nextpagelink[0]
 			else:
 				nextpage = False
-				print "[DEBUG]: No next page found."
+				#print "[DEBUG]: No next page found."
 				
 			regex = '<li><button type="button" class="btn btn-default btn-xs likeButton" data-target="(.*?)"><i class="fa fa-heart"></i> Like</button></li>'
 			likedata = re.findall(regex,curlData)

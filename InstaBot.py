@@ -8,7 +8,10 @@ Repairs:
 	- Updated Login Request
 	- Updated Like Requests
 	- Updated Next Page Search
-==============================
+=================================================================================
+FOR MULTIPLE ACCOUNTS, ADD USERNAME AND PASSWORDS TO THE ARRAYS BELOW. MAKE SURE
+THE APPROPRIATE PASSWORD GOES WITH THE SAME INDEX AS THE USERNAME.
+=================================================================================
 
 This bot gets you more likes and followers on your Instagram account.
 
@@ -21,7 +24,7 @@ Instructions:
 - make sure you have the correct version of Python installed
 - make sure you have the pycurl library installed
 - log into web.stagram.com with your instagram account and approve the app
-- edit between lines 42 and 52
+- edit between lines 52 and 62
 - from the command line, run "python InstaBot.py"
 - enjoy!
 
@@ -33,7 +36,8 @@ v1.0 updates:
 v1.1 updates:
 - added random sleep time between image likes
 - added random tag selection out of list of hashtags
-- added sleep time of 10 minutes if rate-limited
+- added multiple account functions
+- added rate-limited handling based on single or multiple accounts
 '''
 
 import os
@@ -47,14 +51,22 @@ import time
 ##### EDIT THESE BELOW
 
 # your instagram username and password
-username = "username"
-password = "password"
+
+'''
+FORMAT: usernames = ['username1','username2','username3',...,'username#']
+	passwords = ['password1','password2','password3',...,'password#']
+'''
+usernames = ["username1","username2"]
+passwords = ["password1","password2"]
+
+# keeps track of current account to use:
+x = 0
 
 #set a like limit per hashtag. Set value to 0 if you don't want a limit
 hashtaglikelimit = 100
 
 #your list of hashtags
-hashtags = ["love","instagood","me","cute","photooftheday","tbt","instamood","iphonesia","picoftheday","igers","girl","beautiful","instadaily","tweegram","summer","instagramhub","follow","bestoftheday","iphoneonly","igdaily","happy","picstitch","webstagram","fashion","sky","nofilter","jj","followme","fun","smile","sun","pretty","instagramers","food","like","friends","lol","hair","nature","swag","onedirection","bored","funny","life","cool","beach","blue","dog","pink","art","hot","my","family","sunset","photo","versagram","instahub","amazing","statigram","girls","cat","awesome","throwbackthursday","repost","clouds","baby","red","music","party","black","instalove","night","textgram","followback","all_shots","jj_forum","igaddict","yummy","white","yum","bestfriend","green","school","likeforlike","eyes","sweet","instago","tagsforlikes","style","harrystyles","2012","foodporn","beauty","ignation","niallhoran","i","boy","nice","halloween","instacollage"]
+hashtags = ["love","instagood","me","cute","photooftheday","tbt","instamood","iphonesia","picoftheday","igers","girl","beautiful","instadaily","tweegram","summer","instagramhub","follow","bestoftheday","iphoneonly","igdaily","happy","picstitch","webstagram","fashion","sky","nofilter","followme","fun","smile","sun","pretty","instagramers","food","like","friends","lol","hair","nature","bored","funny","life","cool","beach","blue","dog","pink","art","hot","my","family","sunset","photo","versagram","instahub","amazing","statigram","girls","cat","awesome","throwbackthursday","repost","clouds","music","party","black","instalove","night","textgram","followback","igaddict","yummy","white","yum","bestfriend","green","school","likeforlike","eyes","sweet","instago","tagsforlikes","style","2012","foodporn","beauty","boy","nice","halloween","instacollage"]
 
 ##### NO NEED TO EDIT BELOW THIS LINE
 
@@ -67,7 +79,6 @@ def login():
 		os.remove("pycookie.txt")
 	except:
 		pass
-	#print "[DEBUG]: Removed pycookie.txt"
 	
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
@@ -89,7 +100,7 @@ def login():
 	clientid = '9d836570317f4c18bca0db6d2ac38e29'
 	postaction = re.findall(ur"action=\"([^\"]*)\"",curlData)
 	token = re.findall('<input type="hidden" name="csrfmiddlewaretoken" value="(.*?)"/>', curlData)
-	postdata = 'csrfmiddlewaretoken='+token[0]+'&username='+username+'&password='+password
+	postdata = 'csrfmiddlewaretoken='+token[0]+'&username='+usernames[x]+'&password='+passwords[x]
 	
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
@@ -106,23 +117,22 @@ def login():
 	c.setopt(pycurl.POST, 1)
 	c.setopt(pycurl.POSTFIELDS, postdata)
 	c.setopt(pycurl.POSTFIELDSIZE, len(postdata))
-	#c.setopt(pycurl.VERBOSE, True)
 	c.perform()
 	curlData = buf.getvalue()
 	buf.close()
 
 	if '<a href="/logout">LOG OUT</a>' in curlData:
-		print "Logged into " + username
+		print "Logged into " + usernames[x]
 	else:
-		print "Unable to Log into " + username
+		print "Unable to log into " + usernames[x] + " with password " + passwords[x]
 		sys.exit(0)
 
 def like():
 	likecount = 0
+	global x
 	while(True):
 		current_tag = random.randrange(0,len(hashtags)) 
 		print "Current Tag: " + hashtags[current_tag]
-	#for tag in hashtags:
 		hashtaglikes = 0
 		nextpage = "http://web.stagram.com/tag/"+hashtags[current_tag]+"/?vm=list"
 		
@@ -143,7 +153,6 @@ def like():
 			buf.close()	
 			
 			nextpagelink = re.findall(ur'<li><a href="(.*?)" rel="next"><i class="fa fa-chevron-down"></i> Earlier</a></li>',curlData)
-			#print "[DEBUG]: nextpagelink: " + nextpagelink[0]
 			if len(nextpagelink)>0:
 				nextpage = "http://web.stagram.com"+nextpagelink[0]
 			else:
@@ -171,7 +180,6 @@ def like():
 						c.setopt(pycurl.SSL_VERIFYPEER, 0)
 						c.setopt(pycurl.SSL_VERIFYHOST, 0)
 						c.setopt(pycurl.USERAGENT, useragent)
-						#c.setopt(pycurl.VERBOSE, True)
 						c.perform()
 						postData = buf.getvalue()
 						buf.close()
@@ -181,14 +189,30 @@ def like():
 							hashtaglikes += 1
 							print "You liked image "+imageid+"! \t Like count: "+str(likecount)
 							repeat = False
-							time.sleep(random.randrange(5,20))
-						else:							
-							print "Your account has been rate limited. Sleeping for 10 minute(s). Liked "+str(likecount)+" photo(s)..."
-							time.sleep(600)	
-							
+							time.sleep(random.randrange(1,7))
+						else:
+							### If the user has multiple accounts, lets just switch to a new one.
+							if(len(usernames)>1):
+								print "Your account has been rate limited. Switching to backup account."
+								### If we reached the end of the list, well start over.
+								if x == (len(usernames)-1):
+									x = 0
+								### Otherwise we go to the next username and password.
+								else:
+									x += 1
+								#print "Next account to use is " + usernames[x]
+								login()
+								like()
+							### Otherwise let's switch tags:
+							else:
+								print "Your account has been rate limited. Sleeping for 10 minute(s). Liked "+str(likecount)+" photo(s)..."
+								time.sleep(600)
+								like()
+								
 def main():
-    login()
-    like()
+	login()
+	like()
+	
 
 if __name__ == "__main__":
     main()

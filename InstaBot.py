@@ -6,7 +6,7 @@ Repaired By: EMN_DEV
  EMN_DEV NOTES:
 	- Updated Login
 	- Updated Like [Webstagram no longer takes POST requests for liking an image.]
-	
+	- Updated Next Page Link search
 ==============================
 Check www.cranklin.com for updates
 

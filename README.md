@@ -1,14 +1,21 @@
 Instagram-Bot v 1.1
-'''
-Cranklin's Instagram Bot v.1.0
+
 Repaired By: Jeff Henry
+
 Repairs:
+
 - Updated Login Request
+
 - Updated Like Requests
+
 - Updated Next Page Search
+
 =================================================================================
+
 FOR MULTIPLE ACCOUNTS, ADD USERNAME AND PASSWORDS TO THE ARRAYS BELOW. MAKE SURE
+
 THE APPROPRIATE PASSWORD GOES WITH THE SAME INDEX AS THE USERNAME.
+
 =================================================================================
 
 This bot gets you more likes and followers on your Instagram account.

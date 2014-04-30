@@ -1,6 +1,8 @@
 Instagram-Bot v 1.1
 ===============================
-Original Author: Cracklin                   Repaired By: Jeff Henry
+Original Author: Cracklin                   
+
+Repaired By: Jeff Henry
 
 Repairs:
 

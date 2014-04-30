@@ -124,8 +124,7 @@ def like():
 	for tag in hashtags:
 		hashtaglikes = 0
 		nextpage = "http://web.stagram.com/tag/"+tag+"/?vm=list"
-		#print "nextpage: " + nextpage 
-		#enter hashtag like loop
+		
 		while nextpage != False and (hashtaglikes < hashtaglikelimit):
 			buf = cStringIO.StringIO()
 			c = pycurl.Curl()
@@ -137,13 +136,10 @@ def like():
 			c.setopt(pycurl.ENCODING, "")
 			c.setopt(pycurl.SSL_VERIFYPEER, 0)
 			c.setopt(pycurl.SSL_VERIFYHOST, 0)
-			useragent = random.choice(browsers) + str(random.randrange(1,9)) + "." + str(random.randrange(0,50)) + " (" + random.choice(operatingsystems) + "; " + random.choice(operatingsystems) + "; rv:" + str(random.randrange(1,9)) + "." + str(random.randrange(1,9)) + "." + str(random.randrange(1,9)) + "." + str(random.randrange(1,9)) + ")"
 			c.setopt(pycurl.USERAGENT, useragent)
 			c.perform()
 			curlData = buf.getvalue()
 			buf.close()	
-			file = open("log.txt","w")
-			file.write(curlData)
 			
 			nextpagelink = re.findall(ur'<li><a href="(.*?)" rel="next"><i class="fa fa-chevron-down"></i> Earlier</a></li>',curlData)
 			#print "[DEBUG]: nextpagelink: " + nextpagelink[0]

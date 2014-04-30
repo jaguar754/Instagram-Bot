@@ -85,12 +85,12 @@ def login():
 	curlData = buf.getvalue()
 	buf.close()
 	
-	'''			IMPORTANT INFORMATION
+	'''			IMPORTANT INFORMATION				'''
 	clientid = '9d836570317f4c18bca0db6d2ac38e29'
 	postaction = re.findall(ur"action=\"([^\"]*)\"",curlData)
 	token = re.findall('<input type="hidden" name="csrfmiddlewaretoken" value="(.*?)"/>', curlData)
 	postdata = 'csrfmiddlewaretoken='+token[0]+'&username='+username+'&password='+password
-	'''
+	
 	
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()

@@ -2,8 +2,8 @@
 
 '''
 Cranklin's Instagram Bot v.1.0 
-Repaired By: github.com/JeffHenry
-Notes from Jeff:
+Repaired By: EMN_DEV
+ EMN_DEV NOTES:
 	- Updated Login
 	- Updated Like [Webstagram no longer takes POST requests for liking an image.]
 	
@@ -34,6 +34,7 @@ v1.0 updates:
 '''
 
 import os
+import sys
 import pycurl
 import cStringIO
 import re
@@ -66,7 +67,7 @@ def login():
 		os.remove("pycookie.txt")
 	except:
 		pass
-	print "[DEBUG]: Removed pycookie.txt"
+	#print "[DEBUG]: Removed pycookie.txt"
 	
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
@@ -83,12 +84,14 @@ def login():
 	c.perform()
 	curlData = buf.getvalue()
 	buf.close()
-		
+	
+	'''			IMPORTANT INFORMATION
 	clientid = '9d836570317f4c18bca0db6d2ac38e29'
 	postaction = re.findall(ur"action=\"([^\"]*)\"",curlData)
 	token = re.findall('<input type="hidden" name="csrfmiddlewaretoken" value="(.*?)"/>', curlData)
 	postdata = 'csrfmiddlewaretoken='+token[0]+'&username='+username+'&password='+password
-
+	'''
+	
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
 	c.setopt(pycurl.URL, "https://instagram.com"+postaction[0])
@@ -110,10 +113,10 @@ def login():
 	buf.close()
 
 	if '<a href="/logout">LOG OUT</a>' in curlData:
-		print "Logged in"
+		print "Logged into " + username
 	else:
-		print "Unable to Log in"
-
+		print "Unable to Log into " + username
+		sys.exit(0)
 
 def like():
 	likecount = 0
@@ -148,7 +151,7 @@ def like():
 				nextpage = "http://web.stagram.com"+nextpagelink[0]
 			else:
 				nextpage = False
-				#print "[DEBUG]: No next page found."
+				break;
 				
 			regex = '<li><button type="button" class="btn btn-default btn-xs likeButton" data-target="(.*?)"><i class="fa fa-heart"></i> Like</button></li>'
 			likedata = re.findall(regex,curlData)
@@ -158,11 +161,7 @@ def like():
 						break
 					repeat = True
 					while repeat:
-						randomint = random.randint(1000,9999)
-
 						url = 'http://web.stagram.com/api/like/'+imageid
-						#print "[DEBUG]: URL: " + url
-						#postdata = 'pk='+imageid+'&t='+str(randomint)
 						buf = cStringIO.StringIO()
 						c = pycurl.Curl()
 						c.setopt(pycurl.URL, url)
@@ -173,11 +172,7 @@ def like():
 						c.setopt(pycurl.ENCODING, "")
 						c.setopt(pycurl.SSL_VERIFYPEER, 0)
 						c.setopt(pycurl.SSL_VERIFYHOST, 0)
-						useragent = random.choice(browsers) + str(random.randrange(1,9)) + "." + str(random.randrange(0,50)) + " (" + random.choice(operatingsystems) + "; " + random.choice(operatingsystems) + "; rv:" + str(random.randrange(1,9)) + "." + str(random.randrange(1,9)) + "." + str(random.randrange(1,9)) + "." + str(random.randrange(1,9)) + ")"
 						c.setopt(pycurl.USERAGENT, useragent)
-						#c.setopt(pycurl.POST, 1)
-						#c.setopt(pycurl.POSTFIELDS, postdata)
-						#c.setopt(pycurl.POSTFIELDSIZE, len(postdata))
 						#c.setopt(pycurl.VERBOSE, True)
 						c.perform()
 						postData = buf.getvalue()
@@ -185,7 +180,7 @@ def like():
 						if postData == '''{"status":"OK","message":"LIKED"}''':
 							likecount += 1
 							hashtaglikes += 1
-							print "You liked #"+tag+" image "+imageid+"! Like count: "+str(likecount)
+							print "You liked #"+tag+" image "+imageid+"! \t Like count: "+str(likecount)
 							repeat = False
 							sleepcount = 0
 							if sleeptimer > 0:

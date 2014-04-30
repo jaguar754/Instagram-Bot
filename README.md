@@ -1,4 +1,35 @@
 Instagram-Bot
 =============
 
-Upon Recent Updates To Web.Stagram, I modified the python script by github.com/cranklin to fix errors with GET and POST requests with the new sites layout.
+WORKING AS OF APRIL 2014
+
+Cranklin's Instagram Bot v.1.0    Repaired By: github.com/JeffHenry after web.stagrams April 2014 update
+
+Notes from Jeff:
+- Updated Login
+- Updated Like [Webstagram no longer takes POST requests for liking an image.]
+
+==============================
+Check www.cranklin.com for updates
+
+This bot gets you more likes and followers on your Instagram account.
+
+Requirements:
+- python > 2.6 but < 3.0
+- pycurl library
+- web.stagram.com login prior to using the bot
+
+Instructions:
+- make sure you have the correct version of Python installed
+- make sure you have the pycurl library installed
+- log into web.stagram.com with your instagram account and approve the app
+- edit between lines 42 and 52
+- from the command line, run "python webstagram.py"
+- enjoy!
+
+v1.0 updates:
+- added browser agent randomizer
+- added optional sleep timer
+- added optional hashtag limiter
+- added a couple extra additions for some people experiencing SSL errors. (thanks Charlie)
+*** thank you Nick, John, Max, Shahar, Charlie for the help

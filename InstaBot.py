@@ -4,7 +4,7 @@
 Cranklin's Instagram Bot v.1.0
  
 Repaired By: Jeff Henry
-NOTES FROM JEFF:
+Repairs:
 	- Updated Login Request
 	- Updated Like Requests
 	- Updated Next Page Search
@@ -30,11 +30,10 @@ v1.0 updates:
 - added optional hashtag limiter
 - added a couple extra additions for some people experiencing SSL errors. (thanks Charlie)
 
-v1.1 updates [ Jeff Henry ]:
+v1.1 updates:
 - added random sleep time between image likes
 - added random tag selection out of list of hashtags
-- added sleep time of 10 minutes if rate-limited by Instagram
-*** thank you Nick, John, Max, Shahar, Charlie for the help
+- added sleep time of 10 minutes if rate-limited
 '''
 
 import os
@@ -48,8 +47,8 @@ import time
 ##### EDIT THESE BELOW
 
 # your instagram username and password
-username = "username"
-password = "password"
+username = "emn_jefe_built"
+password = "072189"
 
 #set a like limit per hashtag. Set value to 0 if you don't want a limit
 hashtaglikelimit = 100
@@ -183,7 +182,7 @@ def like():
 							print "You liked image "+imageid+"! \t Like count: "+str(likecount)
 							repeat = False
 							time.sleep(random.randrange(5,20))
-						else:
+						else:							
 							print "Your account has been rate limited. Sleeping for 10 minute(s). Liked "+str(likecount)+" photo(s)..."
 							time.sleep(600)	
 							

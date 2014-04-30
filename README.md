@@ -12,9 +12,8 @@ Repairs:
 
 =================================================================================
 
-FOR MULTIPLE ACCOUNTS, ADD USERNAME AND PASSWORDS TO THE ARRAYS BELOW. MAKE SURE
-
-THE APPROPRIATE PASSWORD GOES WITH THE SAME INDEX AS THE USERNAME.
+MULTIPLE ACCOUNTS ADDED!
+Future additions: Concurrent account running.
 
 =================================================================================
 

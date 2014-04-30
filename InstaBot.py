@@ -3,8 +3,8 @@
 '''
 Cranklin's Instagram Bot v.1.0
  
-Repaired By: EMN_DEV
- EMN_DEV NOTES:
+Repaired By: Jeff Henry
+NOTES FROM JEFF:
 	- Updated Login Request
 	- Updated Like Requests
 	- Updated Next Page Search
@@ -33,6 +33,7 @@ v1.0 updates:
 v1.1 updates [ Jeff Henry ]:
 - added random sleep time between image likes
 - added random tag selection out of list of hashtags
+- added sleep time of 10 minutes if rate-limited by Instagram
 *** thank you Nick, John, Max, Shahar, Charlie for the help
 '''
 
@@ -119,7 +120,6 @@ def login():
 
 def like():
 	likecount = 0
-	sleepcount = 0
 	while(True):
 		current_tag = random.randrange(0,len(hashtags)) 
 		print "Current Tag: " + hashtags[current_tag]
@@ -182,12 +182,10 @@ def like():
 							hashtaglikes += 1
 							print "You liked image "+imageid+"! \t Like count: "+str(likecount)
 							repeat = False
-							sleepcount = 0
 							time.sleep(random.randrange(5,20))
 						else:
-							sleepcount += 1
-							print "Your account has been rate limited. Sleeping for "+str(sleepcount)+" minute(s). Liked "+str(likecount)+" photo(s)..."
-							time.sleep(60*sleepcount)	
+							print "Your account has been rate limited. Sleeping for 10 minute(s). Liked "+str(likecount)+" photo(s)..."
+							time.sleep(600)	
 							
 def main():
     login()

@@ -1,5 +1,5 @@
 Instagram-Bot v 1.1
-
+===============================
 Repaired By: Jeff Henry
 
 Repairs:
@@ -11,10 +11,7 @@ Repairs:
 - Updated Next Page Search
 
 =================================================================================
-
-MULTIPLE ACCOUNTS ADDED!
-Future additions: Concurrent account running.
-
+MULTIPLE ACCOUNTS ADDED! Future additions: Concurrent account running.
 =================================================================================
 
 This bot gets you more likes and followers on your Instagram account.
@@ -32,14 +29,13 @@ Instructions:
 - from the command line, run "python InstaBot.py"
 - enjoy!
 
-v1.0 updates:
+v1.0 updates [Cracklin]:
 - added browser agent randomizer
 - added optional hashtag limiter
 - added a couple extra additions for some people experiencing SSL errors. (thanks Charlie)
 
-v1.1 updates:
+v1.1 updates [Jeff Henry]:
 - added random sleep time between image likes
 - added random tag selection out of list of hashtags
 - added multiple account functions
 - added rate-limited handling based on single or multiple accounts
-'''

@@ -56,8 +56,8 @@ import time
 FORMAT: usernames = ['username1','username2','username3',...,'username#']
 	passwords = ['password1','password2','password3',...,'password#']
 '''
-usernames = ["username1","username2"]
-passwords = ["password1","password2"]
+usernames = ["username1"]
+passwords = ["password1"]
 
 # keeps track of current account to use:
 x = 0

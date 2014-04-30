@@ -2,12 +2,12 @@
 
 '''
 Cranklin's Instagram Bot v.1.0 
-Repaired By: EMN_DEV
- EMN_DEV NOTES:
-	- Updated Login
-	- Updated Like [Webstagram no longer takes POST requests for liking an image.]
+Repaired By: Jeff Henry
+Jeff Henry NOTES:
+	- Updated Login Request
+	- Updated Like Requests
 	- Updated Next Page Link search
-==============================
+=========================================
 Check www.cranklin.com for updates
 
 This bot gets you more likes and followers on your Instagram account.
@@ -22,7 +22,7 @@ Instructions:
 - make sure you have the pycurl library installed
 - log into web.stagram.com with your instagram account and approve the app
 - edit between lines 42 and 52
-- from the command line, run "python webstagram.py"
+- from the command line, run "python InstaBot.py"
 - enjoy!
 
 v1.0 updates:

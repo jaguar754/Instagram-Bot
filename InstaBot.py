@@ -126,7 +126,7 @@ def like():
 		hashtaglikes = 0
 		nextpage = "http://web.stagram.com/tag/"+hashtags[current_tag]+"/?vm=list"
 		
-		while nextpage != False and (hashtaglikes < hashtaglikelimit):
+		while nextpage != False and (hashtaglikelimit == 0 or (hashtaglikelimit > 0 and hashtaglikes < hashtaglikelimit)):
 			buf = cStringIO.StringIO()
 			c = pycurl.Curl()
 			c.setopt(pycurl.URL, nextpage)

@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
 '''
-Cranklin's Instagram Bot v.1.0 
-Repaired By: Jeff Henry
-Jeff Henry NOTES:
+Cranklin's Instagram Bot v.1.0
+ 
+Repaired By: EMN_DEV
+ EMN_DEV NOTES:
 	- Updated Login Request
 	- Updated Like Requests
-	- Updated Next Page Link search
-=========================================
-Check www.cranklin.com for updates
+	- Updated Next Page Search
+==============================
 
 This bot gets you more likes and followers on your Instagram account.
 
@@ -27,9 +27,12 @@ Instructions:
 
 v1.0 updates:
 - added browser agent randomizer
-- added optional sleep timer
 - added optional hashtag limiter
 - added a couple extra additions for some people experiencing SSL errors. (thanks Charlie)
+
+v1.1 updates:
+- added random sleep time between image likes
+- added random tag selection out of list of hashtags
 *** thank you Nick, John, Max, Shahar, Charlie for the help
 '''
 
@@ -46,9 +49,6 @@ import time
 # your instagram username and password
 username = "username"
 password = "password"
-
-#set a sleep timer between each like. Set value to 0 if you don't want it to sleep at all
-sleeptimer = 5
 
 #set a like limit per hashtag. Set value to 0 if you don't want a limit
 hashtaglikelimit = 100
@@ -85,12 +85,11 @@ def login():
 	curlData = buf.getvalue()
 	buf.close()
 	
-	'''					IMPORTANT INFORMATION				'''
+	'''								IMPORTANT INFORMATION										'''
 	clientid = '9d836570317f4c18bca0db6d2ac38e29'
 	postaction = re.findall(ur"action=\"([^\"]*)\"",curlData)
 	token = re.findall('<input type="hidden" name="csrfmiddlewaretoken" value="(.*?)"/>', curlData)
 	postdata = 'csrfmiddlewaretoken='+token[0]+'&username='+username+'&password='+password
-	
 	
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
@@ -121,9 +120,12 @@ def login():
 def like():
 	likecount = 0
 	sleepcount = 0
-	for tag in hashtags:
+	while(True):
+		current_tag = random.randrange(0,len(hashtags)) 
+		print "Current Tag: " + hashtags[current_tag]
+	#for tag in hashtags:
 		hashtaglikes = 0
-		nextpage = "http://web.stagram.com/tag/"+tag+"/?vm=list"
+		nextpage = "http://web.stagram.com/tag/"+hashtags[current_tag]+"/?vm=list"
 		
 		while nextpage != False and (hashtaglikes < hashtaglikelimit):
 			buf = cStringIO.StringIO()
@@ -151,6 +153,7 @@ def like():
 				
 			regex = '<li><button type="button" class="btn btn-default btn-xs likeButton" data-target="(.*?)"><i class="fa fa-heart"></i> Like</button></li>'
 			likedata = re.findall(regex,curlData)
+			
 			if len(likedata)>0:
 				for imageid in likedata:
 					if hashtaglikelimit > 0 and hashtaglikes >= hashtaglikelimit:
@@ -173,18 +176,18 @@ def like():
 						c.perform()
 						postData = buf.getvalue()
 						buf.close()
+						
 						if postData == '''{"status":"OK","message":"LIKED"}''':
 							likecount += 1
 							hashtaglikes += 1
-							print "You liked #"+tag+" image "+imageid+"! \t Like count: "+str(likecount)
+							print "You liked image "+imageid+"! \t Like count: "+str(likecount)
 							repeat = False
 							sleepcount = 0
-							if sleeptimer > 0:
-								time.sleep(sleeptimer)
+							time.sleep(random.randrange(5,20))
 						else:
 							sleepcount += 1
-							print "Your account has been rate limited. Sleeping on "+tag+" for "+str(sleepcount)+" minute(s). Liked "+str(likecount)+" photo(s)..."
-							time.sleep(60)	
+							print "Your account has been rate limited. Sleeping for "+str(sleepcount)+" minute(s). Liked "+str(likecount)+" photo(s)..."
+							time.sleep(60*sleepcount)	
 							
 def main():
     login()

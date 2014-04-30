@@ -30,7 +30,7 @@ v1.0 updates:
 - added optional hashtag limiter
 - added a couple extra additions for some people experiencing SSL errors. (thanks Charlie)
 
-v1.1 updates:
+v1.1 updates [ Jeff Henry ]:
 - added random sleep time between image likes
 - added random tag selection out of list of hashtags
 *** thank you Nick, John, Max, Shahar, Charlie for the help

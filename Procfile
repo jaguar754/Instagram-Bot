@@ -1,1 +1,1 @@
-web: gunicorn april:app
+web: python InstaBot.py

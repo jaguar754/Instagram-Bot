@@ -1,1 +1,1 @@
-web: python InstaBot.py
+web: gunicorn InstaBot:app

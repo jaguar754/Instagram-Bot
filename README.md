@@ -1,4 +1,5 @@
 Jeff Henry's Instagram Bot
+===========================
 * Based of Cracklin's Pycurl Bot
 
 This script simulates image likes on various tags. Gets more attention on your account.

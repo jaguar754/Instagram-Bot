@@ -14,7 +14,7 @@ Instructions:
 - make sure you have the correct version of Python installed
 - make sure you have the pycurl library installed
 - log into web.stagram.com with your instagram account and approve the app
-- Edit the usernames and passwords.
+- Edit the usernames and passwords in main()
 - enjoy!
 
 v1.0 updates:

@@ -268,5 +268,5 @@ class Account(object):
 		self.like()
 		
 if __name__ == "__main__":
-	bot = Account("emn_jefe_built","072189")
+	bot = Account("username","password")
 	bot.run()

@@ -46,7 +46,6 @@ hashtaglikelimit = 100
 
 #your list of hashtags
 hashtags = ["love","instagood","me","cute","photooftheday","tbt","instamood","iphonesia","picoftheday","igers","girl","beautiful","instadaily","tweegram","summer","instagramhub","follow","bestoftheday","iphoneonly","igdaily","happy","picstitch","webstagram","fashion","sky","nofilter","followme","fun","smile","sun","pretty","instagramers","food","like","friends","lol","hair","nature","bored","funny","life","cool","beach","blue","dog","pink","art","hot","my","family","sunset","photo","versagram","instahub","amazing","statigram","girls","cat","awesome","throwbackthursday","repost","clouds","music","black","instalove","night","textgram","followback","igaddict","yummy","white","yum","bestfriend","green","school","likeforlike","eyes","sweet","instago","tagsforlikes","style","2012","foodporn","beauty","boy","nice","halloween","instacollage"]
-#hashtags = ['evo','bboy','cars','porsche','nissan','honda','acura','toyota','jdm','bosozoku','gamergirl','girlgamer','model','selfie','girl']
 ##### NO NEED TO EDIT BELOW THIS LINE
 
 browsers = ["IE ","Mozilla/","Gecko/","Opera/","Chrome/","Safari/"]
